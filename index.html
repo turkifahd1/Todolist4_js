@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Document</title>
+    
+</head>
+<body style="font-family: Arial, Helvetica, sans-serif; background-color:skyblue">
+  
+<div class="todo-container"style=" width: 600px;
+margin: 30px auto 0;
+background-color: #009688;">
+  <div class="add-task"style=" padding: 15px;
+  background-color: #009688;
+  position: relative;"> 
+    <input id="taskInput"style="  outline: none;display: inline-block;
+    padding: 10px 15px;
+    border: none;
+    background-color:rgb(180, 173, 178);
+    width: calc(100% - 15px);
+    font-size: 20px;
+    color:#FFF;;"  type="text">
+   <button style="position: absolute;
+   height: 43px;
+   width: 43px;
+   background-color: #FFF;
+   right: 12px;
+   border-radius: 50%;
+   line-height: 23px;
+   text-align: center;
+   color: rebeccapurple;
+   font-size: 38px;
+  
+   cursor: pointer;
+   transition: transform .3s;" onclick="addTask()"class="plus">+</button>
+  </div>
+  <div class="tasks-content"style="padding:15px;background-color:#777">
+    <span class="no-tasks-massege"style="color:red"></span>
+       <span class="task-box">
+      <!-- <span class="delete"style="float: right;
+      background-color: #E91E63;
+      padding: 4px 10px;
+      color: #FFF;
+      font-size: 12px;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;">Delete</span>
+    </span>
+     -->
+    <span class="task-box" id="taskList">
+      <span class="delete" style="float: right;
+      background-color: #E91E63;
+      padding: 4px 10px;
+      color: #FFF;
+      font-size: 12px;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;">Delete</span> 
+    </span>
+  </div>
+</div>
+<div class="task-stats" style=" overflow: hidden;
+margin: 10px auto;
+width: 600px;
+font-size: 12px;">
+   <div class="tasks-count"style=" width: 50%;
+   float: left;
+   padding: 10px;">
+  Tasks <span style="color: #FFF;
+  padding: 1px 5px;
+  font-size: 10px;
+  border-radius: 4px;
+  font-weight: bold;
+  background-color: #E91E63;">0</span>
+  </div>
+  <div class="tasks-completed"style="width: 50%;
+  float: right;
+  padding: 10px;
+  text-align: right;"> 
+  complet <span style=" color: #FFF;
+  padding: 1px 5px;
+  font-size: 10px;
+  border-radius: 4px;
+  font-weight: bold;
+  background-color: #03A9F4;">0</span>
+ </div> 
+</div>
+<script>
+  let theInput =document.querySelector(".add-task input");
+  let theAddButton =document.querySelector(".add-task .plus");
+  let tasksContainer =document.querySelector(".tasks-content");
+  let noTasksMsg =document.querySelector(".no-tasks-massege");
+  let tasksCount=document.querySelector(".tasks-count span");
+  let taskscompleted=document.querySelector(".tasks-completed span");
+  
+  // window.onload=function(){
+  //   theInput.focus();
+  // };
+
+  // //adding the task
+  // theAddButton.onclick=function(){
+    
+  
+   
+
+
+
+
+
+
+
+
+  function addTask() {
+  var taskInput = document.getElementById("taskInput");
+  var taskList = document.getElementById("taskList");
+  if (taskInput.value !== "") {
+    var taskItem = document.createElement("li");
+    var taskText = document.createTextNode(taskInput.value);
+
+    taskItem.appendChild(taskText);
+    taskList.appendChild(taskItem);
+
+    taskInput.value = "";
+
+    taskItem.addEventListener("click", function () {
+      editTask(this);
+    });
+
+    taskItem.addEventListener("contextmenu", function (event) {
+      event.preventDefault();
+      deleteTask(this);
+    });
+  }
+  else {
+    
+      //Remove no tasks massge
+       noTasksMsg.remove();
+
+       //create main span element
+       let mainSpan=document.createElement("span");
+
+       //create Delete Button
+       let deleteElement=document.createElement("span");
+
+       //create the main span text
+       let text =document.createTextNode(theInput.Value);
+
+       //create the delete buton text
+       let deleteText=document.createTextNode("Delete");
+
+       //Add Text to main span
+       mainSpan.appendChild(text);
+
+       //add class to main span
+       mainSpan.className='task-box';
+
+       //Add text To Delete Button 
+       deleteElement.appendChild(deleteText);
+
+       //Add class to delete button
+       deleteElement.className='delete';
+
+       //Add Delete Button to main span
+       mainSpan.appendChild(deleteElement);
+
+       //Add the Task to the Container 
+       tasksContainer.appendChild(mainSpan)
+
+  }
+
+
+  document.addEventListener('click',function(e){
+      //delete task
+      if(e.target.className=='delete'){
+        e.target.parentNode.remove();
+      }
+    })
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////
+  //Foucs on input filed
+  // window.onload=function(){
+  //   theInput.focus();
+  // };
+
+  // //adding the task
+  // theAddButton.onclick=function(){
+    
+  //   //if input is empty
+  //   if (theInput.Value===''){
+  //     console.log("No value");
+  //   }
+    // else{
+    //   //Remove no tasks massge
+    //    noTasksMsg.remove();
+
+    //    //create main span element
+    //    let mainSpan=document.createElement("span");
+
+    //    //create Delete Button
+    //    let deleteElement=document.createElement("span");
+
+    //    //create the main span text
+    //    let text =document.createTextNode(theInput.Value);
+
+    //    //create the delete buton text
+    //    let deleteText=document.createTextNode("Delete");
+
+    //    //Add Text to main span
+    //    mainSpan.appendChild(text);
+
+    //    //add class to main span
+    //    mainSpan.className='task-box';
+
+    //    //Add text To Delete Button 
+    //    deleteElement.appendChild(deleteText);
+
+    //    //Add class to delete button
+    //    deleteElement.className='delete';
+
+    //    //Add Delete Button to main span
+    //    mainSpan.appendChild(deleteElement);
+
+    //    //Add the Task to the Container 
+    //    tasksContainer.appendChild(mainSpan)
+
+    // }
+
+    //delete
+    // document.addEventListener('click',function(e){
+    //   //delete task
+    //   if(e.target.className=='delete'){
+    //     e.target.parentNode.remove();
+    //   }
+    // })
+  }
+</script>
+</body>
+</html>
